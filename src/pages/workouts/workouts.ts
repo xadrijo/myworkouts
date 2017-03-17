@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { WorkoutDetailsPage } from '../workout-details/workout-details';
 
 import { Workout } from '../../providers/workout';
 
@@ -9,6 +10,7 @@ import { Workout } from '../../providers/workout';
   providers: [Workout]
 })
 export class WorkoutsPage {
+  public workouts: any;
 
   constructor(
     public navCtrl: NavController, 
@@ -22,8 +24,14 @@ export class WorkoutsPage {
 
   ngOnInit(){
     this.workoutProvider.getWorkouts().subscribe(workouts => {
-      console.log(workouts);
-    })
+      this.workouts = workouts;
+    });
+  }
+
+  workoutSelected(event, workout) {
+    this.navCtrl.push(WorkoutDetailsPage, {
+      workout: workout
+    });
   }
 
 }
