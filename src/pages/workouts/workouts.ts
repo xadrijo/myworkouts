@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { WorkoutDetailsPage } from '../workout-details/workout-details';
 
@@ -16,10 +16,7 @@ export class WorkoutsPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public workoutProvider: Workout
-  ) {}
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad WorkoutsPage');
+  ) {
   }
 
   ngOnInit(){
