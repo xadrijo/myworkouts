@@ -17,7 +17,17 @@ export class WorkoutsPage {
     public navParams: NavParams,
     public workoutProvider: Workout
   ) {
+    
   }
+
+  ionViewWillEnter() {
+    console.log('Runs when the page is about to enter and become the active page.');
+    this.workoutProvider.getWorkouts().subscribe(workouts => {
+      this.workouts = workouts;
+      console.log(this.workouts);
+    });
+  }
+
 
   ngOnInit(){
     this.workoutProvider.getWorkouts().subscribe(workouts => {

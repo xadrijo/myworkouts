@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 
 import { WorkoutsPage } from '../workouts/workouts';
 import { Workout } from '../../providers/workout';
@@ -17,7 +17,8 @@ export class AddWorkoutPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public workoutProvider: Workout) {}
+    public workoutProvider: Workout,
+    private loadingCtrl: LoadingController) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddWorkoutPage');
@@ -32,13 +33,20 @@ export class AddWorkoutPage {
     console.log(workout);
     var result: any;
 
+    let loading = this.loadingCtrl.create();
+    loading.present();
+
     this.workoutProvider.addWorkout(workout).subscribe(data => {
       result = data;
+      loading.dismiss()
+      
+      this.navCtrl.setRoot(WorkoutsPage);
     }, 
     err => console.log(err), 
     () => console.log('Workout Added'));
 
-    this.navCtrl.setRoot(WorkoutsPage);
   }
+
+
 
 }
